@@ -1,5 +1,8 @@
+require 'rqrcode'
+require 'zxing'
+
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products
   # GET /products.json
@@ -10,6 +13,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @qrcode = RQRCode::QRCode.new(@product.code.to_s)
   end
 
   # GET /products/new
@@ -25,6 +29,12 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
+    qrcode = RQRCode::QRCode.new(@product.code.to_s)
+    png_code = qrcode.as_png
+    filew = File.open("#{@product.name}.png", 'wb')
+    png_code.save(filew)
+    filer = File.open(filew, 'r')
+    @product.qrcode.attach(io: filer, filename: "#{@product.name}.png")
 
     respond_to do |format|
       if @product.save
@@ -58,6 +68,23 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def search_product
+  end
+
+  def get_from_image
+    result = ZXing.decode params[:code]
+    @product = Product.where(code: result).first
+    respond_to do |format|
+      if @product.present?
+        format.html { redirect_to @product, notice: 'Product was successfully found.' }
+        format.json { render :show, status: :created, location: @product }
+      else
+        format.html { redirect_to :products_search_product, notice: 'Product not found.' }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
 
