@@ -1,4 +1,20 @@
-<style>
+<p id="notice"><%= notice %></p>
+
+<%= form_with(url: products_get_from_image_path, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.file_field :code %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= form.submit 'Search' %>
+  </div>
+<% end %>
+
+<% if @product %>
+  <style>
   table {
     border-width: 0;
     border-style: none;
@@ -38,4 +54,5 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
-<%= link_to 'Search Product', products_search_product_path %>
+
+<% end %>
