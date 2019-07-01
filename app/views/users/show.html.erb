@@ -20,5 +20,10 @@
   <%= @user.dni %>
 </p>
 
+<p>
+  <strong>Iris:</strong>
+  <%= image_tag url_for(@user.iris) %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

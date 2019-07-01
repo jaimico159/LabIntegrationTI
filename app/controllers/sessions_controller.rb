@@ -31,6 +31,8 @@ class SessionsController < ApplicationController
     else
       puts "ERROR"
       flash[:error] = "Invalid email or password"
+      redirect_to auth_path
+      return
     end
     
     redirect_to users_path

@@ -14,9 +14,11 @@
     <ul>
       <li><%= link_to "HOME", root_path %></li>
       <% if current_user %>
-        <li><%= link_to "Cerrar Sesión", logout_path, method: :delete %></li>
+        <li><%= link_to "Users", users_path %></li>
+        <li><%= link_to "Products", products_path %></li>
+        <li><%= link_to "Log Out", logout_path, method: :delete %></li>
       <% else %>
-        <li><%= link_to "Iniciar Sesión", auth_path %></li>
+        <li><%= link_to "Log In", auth_path %></li>
       <% end %>
     </ul>
     </nav>

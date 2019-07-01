@@ -3,8 +3,8 @@
 <%= form_with(url: users_match_by_dni_path, local: true) do |form| %>
 
   <div class="field">
-    <%= form.label :iris %>
-    <%= form.file_field :iris %>
+    <%= form.label :dni %>
+    <%= form.text_field :dni %>
   </div>
   <br>
 
@@ -23,18 +23,13 @@
 </p>
 
 <p>
-  <strong>Age:</strong>
-  <%= @user.age %>
+  <strong>Dni:</strong>
+  <%= @user.dni %>
 </p>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
-</p>
-
-<p>
-  <strong>Iris:</strong>
-  <%= image_tag url_for(@user.iris) %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
