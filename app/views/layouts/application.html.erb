@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <nav>
+    <ul>
+      <li><%= link_to "HOME", root_path %></li>
+      <% if current_user %>
+        <li><%= link_to "Cerrar Sesión", logout_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Iniciar Sesión", auth_path %></li>
+      <% end %>
+    </ul>
+    </nav>
     <%= yield %>
   </body>
 </html>

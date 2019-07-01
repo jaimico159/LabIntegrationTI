@@ -1,0 +1,36 @@
+<p id="error"><%= flash[:error] %></p>
+
+<div class="row">
+  <div class="large-5 columns centered">
+    <h1>Admin - Login</h1>
+
+    <%= form_for(:session, :url => login_path ) do |f| %>
+
+      <div class="form-group">
+        <label for="name">Email</label>
+        <%= f.text_field :email, :class => "form-control", :required => '' %>
+        <label for="name">Password</label>
+        <%= f.password_field :password, :class => "form-control", :required => '' %>
+      </div>
+      <button type="submit" class="button tiny float-right">Submit</button>
+
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-5 columns centered">
+    <h1>Admin - Login with Iris</h1>
+
+    <%= form_for(:session, :url => login_iris_path ) do |f| %>
+
+      <div class="form-group">
+        <label for="iris">Iris Image</label>
+        <%= f.file_field :iris, :class => "form-control", :required => '' %>
+      </div>
+      <button type="submit" class="button tiny float-right">Submit</button>
+
+    <% end %>
+  </div>
+</div>
+
